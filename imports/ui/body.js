@@ -25,7 +25,7 @@ Template.soup.events({
 			menu["soups"].forEach((soup) =>{
 				if(soup["text"] === text){
 					soup["rating"] = template.$('.rateit').rateit('value');
-					Menu.save({_id: recordID}, menu);
+					
 				}
 			});
 		});
