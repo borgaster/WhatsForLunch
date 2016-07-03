@@ -1,0 +1,44 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>What's for lunch today?</h1>
+      <p>Menu for {{dayOfWeek}}</p>
+    </header>
+    {{#each menu}}
+      <h3>Soups</h3>
+      {{#each soups}}
+      <ul>
+        {{> soup }}
+      </ul> 
+      {{/each}}
+      <h3>Mains</h3>
+      {{#each mains}}
+      <ul>
+        {{> main }}
+      </ul> 
+      {{/each}}
+      <h3>Desserts</h3>
+      {{#each desserts}}
+      <ul>
+        {{> dessert}}
+      </ul> 
+      {{/each}}
+    {{else}}
+      <h3>No lunch served today</h3>
+    {{/each}}
+    <button class="btn submit">Submit Rating</button>
+  </div>
+</body>
+
+<template name="soup">
+  <li>{{text}} {{> rating}}</li>
+</template>
+<template name="main">
+  <li>{{text}} {{> rating}}</li>
+</template>
+<template name="dessert">
+  <li>{{text}} {{> rating}}</li>
+</template>
+<template name="rating">
+   <div class="rateit" data-rateit-value="{{rating}}"></div>
+</template>
