@@ -26,7 +26,6 @@
     {{else}}
       <h3>No lunch served today</h3>
     {{/each}}
-    <button class="btn submit">Submit Rating</button>
   </div>
 </body>
 
@@ -40,5 +39,5 @@
   <li>{{text}} {{> rating}}</li>
 </template>
 <template name="rating">
-   <div class="rateit" data-rateit-value="{{rating}}"></div>
+   <div class="rateit" data-rateit-value=0></div>
 </template>

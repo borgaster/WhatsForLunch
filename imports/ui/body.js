@@ -18,16 +18,20 @@ Template.body.helpers({
 
 Template.soup.events({
 	'click .rateit'(event, template){
-		console.log(Menu);
+		event.preventDefault();
 		let text = this.text;
-		this["rating"] = template.$('.rateit').rateit('value');
-		menuOfToday.forEach((menu) => {
-			menu["soups"].forEach((soup) =>{
-				if(soup["text"] === text){
-					soup["rating"] = template.$('.rateit').rateit('value');
-					
-				}
-			});
+		let menu = Menu.findOne({_id: recordID})
+		console.log(menu)
+		menu["soups"].forEach((soup) => {
+			if(soup["text"] === text){
+				soup["rating"] = soup["rating"] + template.$('.rateit').rateit('value');
+				template.$('.rateit').attr("disabled", true);
+				Menu.update({_id:recordID}, {
+					$set:{
+						soups: menu["soups"] 
+					}
+				});
+			}
 		});
 		return false;
 	}
