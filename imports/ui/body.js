@@ -37,6 +37,49 @@ Template.soup.events({
 	}
 });
 
+Template.main.events({
+	'click .rateit'(event, template){
+		event.preventDefault();
+		let text = this.text;
+		let menu = Menu.findOne({_id: recordID})
+		console.log(menu)
+		menu["mains"].forEach((mains) => {
+			if(mains["text"] === text){
+				mains["rating"] = mains["rating"] + template.$('.rateit').rateit('value');
+				template.$('.rateit').attr("disabled", true);
+				Menu.update({_id:recordID}, {
+					$set:{
+						mains: menu["mains"] 
+					}
+				});
+			}
+		});
+		return false;
+	}
+});
+
+Template.dessert.events({
+	'click .rateit'(event, template){
+		event.preventDefault();
+		let text = this.text;
+		let menu = Menu.findOne({_id: recordID})
+		console.log(menu)
+		menu["desserts"].forEach((desserts) => {
+			if(mains["text"] === text){
+				desserts["rating"] = desserts["rating"] + template.$('.rateit').rateit('value');
+				template.$('.rateit').attr("disabled", true);
+				Menu.update({_id:recordID}, {
+					$set:{
+						desserts: menu["desserts"] 
+					}
+				});
+			}
+		});
+		return false;
+	}
+});
+
+
 // .rateit elements need to be progressively enhanced after they're created
 Template.rating.rendered = function () {
   this.$('.rateit').rateit();
