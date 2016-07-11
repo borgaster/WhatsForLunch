@@ -6,15 +6,28 @@ Date.prototype.getDayOfWeek = function(){
 export const Menu = new Mongo.Collection('menu');
 
 Meteor.methods({
-	'rateit'(mealCourse, rate,  recordID, description){
-		let menu = Menu.findOne({_id: recordID})
-		menu[mealCourse].forEach((meal) => {
-			if(meal["text"] === description){
-				meal["rating"] = meal["rating"] + rate
+	'soups.rateit'(mealCourse, rate,  recordID, description){		
+		Menu.update({_id: recordID, "soups.text": description}, {
+			$inc:{
+				"soups.$.rating": rate
 			}
-		})
-		delete menu._id
-		Menu.update({_id:recordID}, { $set: menu });
+		});
+	},
+	'mains.rateit'(mealCourse, rate,  recordID, description){		
+		Menu.update({_id: recordID, "mains.text": description}, {
+			$inc:{
+				"mains.$.rating": rate
+			}
+		});
+	},
+
+	'desserts.rateit'(mealCourse, rate,  recordID, description){		
+		Menu.update({_id: recordID, "desserts.text": description}, {
+			$inc:{
+				"desserts.$.rating": rate
+			}
+		});
 	}
+
 });
 

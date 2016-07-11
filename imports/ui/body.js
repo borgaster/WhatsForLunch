@@ -21,7 +21,7 @@ Template.soup.events({
 	'click .rateit'(event, template){
 		let description = this.text;
 		let rate = template.$('.rateit').rateit('value');
-		Meteor.call('rateit', "soups", rate, recordID, description);
+		Meteor.call('soups.rateit', "soups", rate, recordID, description);
 		return false;
 	}
 });
@@ -30,7 +30,7 @@ Template.main.events({
 	'click .rateit'(event, template){
 		let description = this.text;
 		let rate = template.$('.rateit').rateit('value');
-		Meteor.call('rateit', "mains", rate, recordID, description);
+		Meteor.call('mains.rateit', "mains", rate, recordID, description);
 		return false;
 	}
 });
@@ -39,7 +39,7 @@ Template.dessert.events({
 	'click .rateit'(event, template){
 		let description = this.text;
 		let rate = template.$('.rateit').rateit('value');
-		Meteor.call('rateit', "desserts", rate, recordID, description);
+		Meteor.call('desserts.rateit', "desserts", rate, recordID, description);
 		return false;
 	}
 });
