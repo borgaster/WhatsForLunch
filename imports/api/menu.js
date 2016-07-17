@@ -4,6 +4,28 @@ Date.prototype.getDayOfWeek = function(){
     return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][ this.getDay() ];
 }
 export const Menu = new Mongo.Collection('menu');
+let courseSchema = new SimpleSchema({
+	text: {
+		type: String
+	},
+	rating: {
+		type: Number
+	}
+});
+
+let menuSchema = new SimpleSchema({
+	soups: {
+		type: [courseSchema]
+	},
+	mains: {
+		type: [courseSchema]
+	},
+	desserts: {
+		type: [courseSchema]
+	}
+});
+
+Menu.attachSchema(menuSchema);
 
 Meteor.methods({
 	'soups.rateit'(mealCourse, rate,  recordID, description){		
